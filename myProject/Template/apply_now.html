@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            padding: 20px;
+            background-color: #e9ecef;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-control, .form-control-file {
+            border-radius: 5px;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+
+        <h1>You are going to apply for {{ specific_job.job_title }}</h1>
+
+        {% if already_exists %}
+            <h2 class="text-danger">Already Applied</h2>
+        {% else %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th><label for="full_name">Full Name:</label></th>
+                    <td><input type="text" id="full_name" name="full_name" required></td>
+                </tr>
+                <tr>
+                    <th><label for="work_experience">Work Experience:</label></th>
+                    <td><input type="text" id="work_experience" name="work_experience"></td>
+                </tr>
+                <tr>
+                    <th><label for="skills">Skills:</label></th>
+                    <td><input type="text" id="skills" name="skills"></td>
+                </tr>
+                <tr>
+                    <th><label for="linkedin_url">LinkedIn URL:</label></th>
+                    <td><input type="url" id="linkedin_url" name="linkedin_url"></td>
+                </tr>
+                <tr>
+                    <th><label for="resume">Resume:</label></th>
+                    <td><input type="file" id="resume" name="resume" required></td>
+                </tr>
+                <tr>
+                    <th><label for="cover">Cover Letter:</label></th>
+                    <td><textarea id="cover" name="cover" rows="4"></textarea></td>
+                </tr>
+                <tr>
+                    <th><label for="expected_salary">Expected Salary:</label></th>
+                    <td><input type="number" id="expected_salary" name="expected_salary" min="0"></td>
+                </tr>
+            </table>
+            <input type="submit" value="Apply Now">
+            
+            </form>
+        {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html>
+
+{% endblock body %}

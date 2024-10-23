@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Jobs You've Applied For</h1>
+
+    <!-- Check if the user has applied to any jobs -->
+    {% if Job %}
+        <!-- Responsive table wrapper -->
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Vacancy</th>
+                        <th scope="col">skills</th>
+                        <th scope="col">category</th>
+                        <th scope="col">description</th>
+                        <th scope="col">Resume</th>
+                        <th scope="col">Actions</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job_application in Job %}
+                    <tr>
+                        <td>{{ job_application.job.job_title }}</td>
+                        <td>{{ job_application.job.vacancy }}</td>
+                        <td>{{ job_application.job.skills }}</td>
+                        <td>${{ job_application.job.category }}</td>
+                        <td>{{ job_application.job.description }}</td>
+                        
+                        <td>
+                            <a href="{{ job_application.Resume.url }}" target="_blank" class="btn btn-outline-info btn-sm">Download</a>
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-outline-secondary btn-sm">View Job</a>
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">
+            You haven't applied for any jobs yet.
+        </div>
+    {% endif %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock body %}
